@@ -13,7 +13,7 @@ export const store = {
     todo: '1'
   },
   b: {
-    todo: '2'
+    todo: '3'
   }
 }
 
