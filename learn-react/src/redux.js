@@ -1,32 +1,34 @@
 import { createStore, bindActionCreators } from 'redux'
-import * as actionTypes from './action/actionTypes'
-import * as actions from './action/createAction'
-// const action = {
-//   type: 'increase',
-//   payload: 10
-// }
+import reduce from './reducer'
+import * as loginAction from './action/loginAction';
+import * as userAction from './action/userAction';
+import { v4 as uuid } from 'uuid';
 
-const reduce = (state, action) => {
-  switch (action.type) {
-    case actionTypes.INCREASE:
-      return state + action.payload;
-    case actionTypes.DECREASE:
-      return state - action.payload;
-    case actionTypes.SET:
-      return action.payload;
-    default:
-      return state;
-  }
+const action = {
+  ...loginAction,
+  ...userAction
 }
+const store = createStore(reduce);
 
-const store = createStore(reduce, 20);
-const boundActions = bindActionCreators(actions, store.dispatch);
 console.log(store.getState());
-// store.dispatch(actions.createDecreaseAction(5));
-// console.log(store.getState());
-// store.dispatch(actions.createIncreaseAction(10));
-// console.log(store.getState());
-// store.dispatch(actions.createSetAction(100));
-// console.log(store.getState());
-boundActions.createIncreaseAction(5);
+
+const boundActions = bindActionCreators(action, store.dispatch);
+
+boundActions.addUserAction( {
+    name: 'heihei',
+    sex:'woman'
+})
+
+boundActions.createLoginAction( {
+    name: 'heihei',
+    sex:'woman'
+})
+
+// store.dispatch(loginAction.createLoginAction({
+//   id: uuid(),
+//   name: 'heihei',
+//   age: 19
+// }))
 console.log(store.getState());
+
+
