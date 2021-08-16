@@ -1,6 +1,6 @@
 import loginUser from './loginReduce';
 import users from './usersReduce';
-import { combineReducers } from 'redux'
+import { combineReducers } from '../redux/index'
 const myCombineReducers = (oldState => {
   return ((state = {}, action) => {
     const newState = {};
