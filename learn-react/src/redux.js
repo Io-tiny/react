@@ -1,4 +1,4 @@
-import { createStore, bindActionCreators } from 'redux'
+import { createStore, bindActionCreators } from './redux/index'
 import reduce from './reducer'
 import * as loginAction from './action/loginAction';
 import * as userAction from './action/userAction';
@@ -12,17 +12,18 @@ const store = createStore(reduce);
 
 console.log(store.getState());
 
-const boundActions = bindActionCreators(action, store.dispatch);
+const bindActions = bindActionCreators(action.createLoginAction, store.dispatch);
 
-boundActions.addUserAction( {
-    name: 'heihei',
-    sex:'woman'
+bindActions({
+  id: uuid(),
+  name: 'heihei',
+  age: 19
 })
-
-boundActions.createLoginAction( {
-    name: 'heihei',
-    sex:'woman'
-})
+// bindActions.addUserAction({
+//   id: uuid(),
+//   name: 'heihei2',
+//   age: 19
+// })
 
 // store.dispatch(loginAction.createLoginAction({
 //   id: uuid(),
