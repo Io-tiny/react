@@ -1,5 +1,8 @@
 import { isPlainObject, ActionTypes } from "../units/units";
-
+/**
+ * 用于验证reducer是否符合规范，其中的for循环是为了检验每一个reducer是否给了初始值，因为reducer不能返回undefined，所以如果传入的state为undefined为undefined的话就会使用初始值；如果没设置初始值就会报错
+ * @param {*} reducers reduce集合
+ */
 function validateReducers(reducers) {
   if (typeof reducers !== 'object') {
     throw new TypeError('reducers must be a object');
@@ -14,7 +17,6 @@ function validateReducers(reducers) {
       let state = reducer(undefined, {
         type: ActionTypes.INIT()
       })
-      console.log(state);
       if (state === undefined) {
         throw new TypeError("reducers must not return undefined");
       }
